@@ -15,7 +15,7 @@ describe('API utils', () => {
     expect(instance).toHaveProperty('post')
   })
 
-  test.skip('should return an instance with a UPDATE method', () => {
+  test('should return an instance with a UPDATE method', () => {
     expect(instance).toHaveProperty('update')
   })
 

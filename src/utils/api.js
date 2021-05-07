@@ -14,6 +14,23 @@ function handleFetchResponse(response) {
 }
 
 /**
+ * Helper function for simplifying fetch API calls.
+ *
+ * @param {String} url
+ * @param {Object} httpOpt
+ *
+ * @returns {Promise}
+*/
+function handleFetchPromise(url, httpOpt) {
+  return new Promise((resolve, reject) => {
+    fetch(url, httpOpt)
+      .then(handleFetchResponse)
+      .then((response) => { resolve(response) })
+      .catch((error) => { reject(error) })
+  })
+}
+
+/**
  * API class for executing fetch methods.
  *
  * @returns {Object}
@@ -27,26 +44,23 @@ function API (path = '') {
 
   return {
     get(query = {}) {
-      return new Promise((resolve, reject) => {
-        fetch(URLQueryParams(url, query), { headers })
-          .then(handleFetchResponse)
-          .then((response) => { resolve(response) })
-          .catch((error) => { reject(error) })
-      })
+      return handleFetchPromise(URLQueryParams(url, query), { headers })
     },
     post(payload = {}) {
-      return new Promise((resolve, reject) => {
-        const opt = {
-          method: 'POST',
-          headers: headers,
-          body: JSON.stringify(payload)
-        }
-
-        fetch(url, opt)
-          .then(handleFetchResponse)
-          .then((response) => { resolve(response) })
-          .catch((error) => { reject(error) })
-      })
+      const opt = {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(payload)
+      }
+      return handleFetchPromise(url, opt)
+    },
+    update(id, payload = {}) {
+      const opt = {
+        method: 'PUT',
+        headers: headers,
+        body: JSON.stringify(payload)
+      }
+      return handleFetchPromise(`${url}${id}/`, opt)
     },
   }
 }

@@ -37,7 +37,11 @@ Entry.prototype.save = async function () {
       this.created_at = response.created_at
       this.updated_at = response.updated_at
     } else {
-      /*TODO Update logic*/
+      const response = await entryAPI.update(this.id, {
+        value: this.value,
+        entry_type: this.entry_type,
+      })
+      this.updated_at = response.updated_at
     }
   } catch (error) {
     console.error(error)

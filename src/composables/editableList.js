@@ -22,9 +22,9 @@ export default function editableList(entryType = ENTRY_TYPE.VALUE, newComponent 
     }),
 
     methods: Object.assign({}, {
-      onSaveHandler (item) {
-        if (item instanceof Entry) {
-          item.save()
+      onSaveHandler (itemIdx) {
+        if (this.items[itemIdx] instanceof Entry) {
+          this.items[itemIdx].save()
         }
       },
       onAddHandler (value) {

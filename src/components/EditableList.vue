@@ -4,7 +4,7 @@
     <span v-if="!editable">{{ item.value }}</span>
     <div class="editable-form" v-else>
       <input name="value-field" v-model="item.value" />
-      <button @click="onClickSave">Save</button>
+      <button @click="onClickSave(idx)">Save</button>
       <button>Delete</button>
     </div>
   </li>
@@ -29,8 +29,8 @@ export default {
     newValue: '',
   }),
   methods: {
-    onClickSave () {
-      this.$emit('onClickSave', this.item)
+    onClickSave (idx) {
+      this.$emit('onClickSave', idx)
     },
     onClickAdd () {
       this.$emit('onClickAdd', this.newValue)
