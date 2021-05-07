@@ -5,7 +5,7 @@
     <span v-if="editable">Done</span>
     <span v-else>Edit</span>
   </button>
-  <Values />
+  <Values :editable="editable" />
   <hr />
   <Principles :editable="editable" />
 </div>
