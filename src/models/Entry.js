@@ -1,11 +1,13 @@
 import API from '@/utils/api'
 
+import { ENTRY_TYPE } from '@/constants'
+
 const entryAPI = API('manifesto/entry/')
 
 function Entry (props) {
   this.id = props?.id || 0
   this.value = props?.value || ''
-  this.entry_type = props?.entry_type || 0
+  this.entry_type = props?.entry_type || ENTRY_TYPE.VALUE
   this.created_at = props?.created_at || null
   this.updated_at = props?.updated_at || null
 }
@@ -15,9 +17,31 @@ function Entry (props) {
  * @param {Number} type
  * @returns Array<Entry>
  */
-Entry.prototype.getList = async (type) => {
+Entry.prototype.getList = async function (type) {
   const entries = await entryAPI.get({ type })
   return entries.map((entry) => new Entry(entry))
+}
+
+/**
+ * Save Entry object save to DB.
+*/
+Entry.prototype.save = async function () {
+  try {
+    if (this.id === 0) {
+      const response = await entryAPI.post({
+        value: this.value,
+        entry_type: this.entry_type,
+      })
+
+      this.id = response.id
+      this.created_at = response.created_at
+      this.updated_at = response.updated_at
+    } else {
+      /*TODO Update logic*/
+    }
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 export default Entry

@@ -3,13 +3,13 @@
   <li v-for="(item, idx) in items" :key="idx">
     <span v-if="!editable">{{ item.value }}</span>
     <div class="editable-form" v-else>
-      <input name="value-field" :value="item.value" />
-      <button>Save</button>
+      <input name="value-field" v-model="item.value" />
+      <button @click="onClickSave">Save</button>
       <button>Delete</button>
     </div>
   </li>
   <li class="new-form" v-if="editable">
-    <input name="value-field" /> <button>Add</button>
+    <input name="value-field" v-model="newValue" /><button @click="onClickAdd">Add</button>
   </li>
 </ul>
 </template>
@@ -24,6 +24,18 @@ export default {
     items: {
       required: true,
     },
+  },
+  data: () => ({
+    newValue: '',
+  }),
+  methods: {
+    onClickSave () {
+      this.$emit('onClickSave', this.item)
+    },
+    onClickAdd () {
+      this.$emit('onClickAdd', this.newValue)
+      this.newValue = ''
+    }
   },
 }
 </script>
@@ -45,5 +57,8 @@ export default {
 }
 .editable-form input:focus {
   outline: none;
+}
+.new-form {
+  margin-top: 24px;
 }
 </style>

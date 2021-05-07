@@ -2,8 +2,10 @@
 <div id="principles">
   <em>We follow these principles:</em>
   <editable-list
-    :items="principles"
+    :items="items"
     :editable="editable"
+    @onClickSave="onSaveHandler"
+    @onClickAdd="onAddHandler"
   />
 </div>
 </template>
@@ -11,23 +13,7 @@
 <script>
 import { ENTRY_TYPE } from '@/constants'
 
-import Entry from '@/models/Entry'
+import editableList from '@/composables/editableList'
 
-import EditableList from './EditableList'
-
-export default {
-  components: { EditableList },
-  props: {
-    editable: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  data: () => ({
-    principles: [],
-  }),
-  async mounted () {
-    this.principles = await Entry.prototype.getList(ENTRY_TYPE.PRINCIPLE)
-  },
- }
+export default editableList(ENTRY_TYPE.PRINCIPLE)
 </script>
