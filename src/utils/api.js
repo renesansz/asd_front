@@ -62,6 +62,13 @@ function API (path = '') {
       }
       return handleFetchPromise(`${url}${id}/`, opt)
     },
+    delete(id) {
+      const opt = {
+        method: 'DELETE',
+        headers: headers
+      }
+      return handleFetchPromise(`${url}${id}/`, opt)
+    },
   }
 }
 

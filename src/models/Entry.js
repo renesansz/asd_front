@@ -48,4 +48,16 @@ Entry.prototype.save = async function () {
   }
 }
 
+/**
+ * Delete Entry data in DB.
+*/
+Entry.prototype.delete = async function () {
+  try {
+    const response = await entryAPI.delete(this.id)
+    return response
+  } catch (error) {
+    //
+  }
+}
+
 export default Entry

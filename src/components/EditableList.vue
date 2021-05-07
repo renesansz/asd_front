@@ -5,7 +5,7 @@
     <div class="editable-form" v-else>
       <input name="value-field" v-model="item.value" />
       <button @click="onClickSave(idx)">Save</button>
-      <button>Delete</button>
+      <button @click="onClickDelete(item.id)">Delete</button>
     </div>
   </li>
   <li class="new-form" v-if="editable">
@@ -35,8 +35,11 @@ export default {
     onClickAdd () {
       this.$emit('onClickAdd', this.newValue)
       this.newValue = ''
-    }
-  },
+    },
+    onClickDelete (itemID) {
+      this.$emit('onClickDelete', itemID)
+    },
+   },
 }
 </script>
 

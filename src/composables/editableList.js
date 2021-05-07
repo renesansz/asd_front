@@ -33,6 +33,13 @@ export default function editableList(entryType = ENTRY_TYPE.VALUE, newComponent 
         newEntry.save()
 
         this.items.push(newEntry)
+      },
+      onDeleteHandler (id) {
+        const idx = this.items.findIndex(i => i.id === id)
+        if (idx && this.items[idx] instanceof Entry) {
+          this.items[idx].delete()
+          this.items.splice(idx, 1)
+        }
       }
     }, newComponent?.components || {}),
 

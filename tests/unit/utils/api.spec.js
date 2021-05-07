@@ -19,7 +19,7 @@ describe('API utils', () => {
     expect(instance).toHaveProperty('update')
   })
 
-  test.skip('should return an instance with a DELETE method', () => {
+  test('should return an instance with a DELETE method', () => {
     expect(instance).toHaveProperty('delete')
   })
 })

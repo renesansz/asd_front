@@ -6,6 +6,7 @@
     :editable="editable"
     @onClickSave="onSaveHandler"
     @onClickAdd="onAddHandler"
+    @onClickDelete="onDeleteHandler"
   />
 </div>
 </template>
