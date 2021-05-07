@@ -1,1 +1,2 @@
-API_TOKEN=
+VUE_APP_API_URL=http://localhost:8000
+VUE_APP_API_TOKEN=
