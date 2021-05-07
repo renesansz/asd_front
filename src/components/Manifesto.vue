@@ -1,5 +1,6 @@
 <template>
 <div id="manifesto">
+  <h1 class="title">The Agile Manifesto</h1>
   <Values />
   <hr />
   <Principles />

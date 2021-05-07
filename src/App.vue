@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <h1>The Agile Manifesto</h1>
     <Manifesto />
   </div>
 </template>
