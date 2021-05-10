@@ -6,10 +6,12 @@
  * @returns {String}
  */
 export function URLQueryParams(url, queryParams = {}) {
-  const queries = Object.entries(queryParams).reduce((acc, [key, val]) => {
-    acc.push(`${key}=${val}`)
-    return acc
-  }, []).join('&')
+  const searchParams = new URLSearchParams()
+  const queries = Object.entries(queryParams)
 
-  return queries.length > 0 ? `${ url }?${ queries }` : url
+  queries.forEach(([key, val]) => {
+    searchParams.append(key, val)
+  })
+
+  return queries.length > 0 ? `${ url }?${ searchParams.toString() }` : url
 }
